@@ -1,5 +1,6 @@
 use pest::iterators::Pair;
 use pest::Parser;
+use pest_derive::Parser;
 use petrol_core::schema::*;
 use petrol_core::PetrolError;
 use thiserror::Error;
@@ -244,7 +245,7 @@ fn parse_field_attribute(pair: Pair<Rule>) -> Result<FieldAttribute, ParserError
         "id" => FieldAttribute::Id,
         "unique" => FieldAttribute::Unique,
         "updatedAt" => FieldAttribute::UpdatedAt,
-        "map" => FieldAttribute::Map(args.clone().map(unquote).unwrap_or_default()),
+        "map" => FieldAttribute::Map(args.clone().as_deref().map(unquote).unwrap_or_default()),
         "default" => FieldAttribute::Default(parse_default(args.clone().unwrap_or_default())?),
         "relation" => {
             FieldAttribute::Relation(parse_relation_attribute(args.clone().unwrap_or_default())?)

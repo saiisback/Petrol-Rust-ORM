@@ -3,9 +3,8 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use anyhow::{anyhow, Context};
 use clap::{Parser, Subcommand};
-use color_eyre::eyre::Result;
+use color_eyre::eyre::{eyre, Result, WrapErr};
 use inflector::Inflector;
 use petrol_client::PetrolClient;
 use petrol_codegen::generate;
@@ -105,7 +104,7 @@ fn handle_init(schema_path: PathBuf) -> Result<()> {
         .parent()
         .map(Path::to_path_buf)
         .unwrap_or_else(|| PathBuf::from("."));
-    fs::create_dir_all(&parent).context("failed to create schema directory")?;
+    fs::create_dir_all(&parent).wrap_err("failed to create schema directory")?;
     fs::write(&schema_path, DEFAULT_SCHEMA.trim_start())?;
     info!("created schema at {:?}", schema_path);
     Ok(())
@@ -232,7 +231,7 @@ fn build_model_from_columns(table: &str, columns: &[DbColumn]) -> Result<Model> 
 
 fn build_field(col: &DbColumn) -> Result<Field> {
     let scalar = map_sql_to_scalar(&col.data_type)
-        .ok_or_else(|| anyhow!("unsupported SQL type {}", col.data_type))?;
+        .ok_or_else(|| eyre!("unsupported SQL type {}", col.data_type))?;
 
     let mut attributes = Vec::new();
     if col.name == "id" {

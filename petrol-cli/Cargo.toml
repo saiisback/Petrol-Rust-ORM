@@ -5,7 +5,6 @@ edition = "2021"
 license = "MIT"
 
 [dependencies]
-anyhow = { workspace = true }
 clap = { workspace = true }
 color-eyre = { workspace = true }
 inflector = { workspace = true }
