@@ -1,0 +1,8 @@
+[package]
+name = "petrol-example-basic"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+petrol-client = { path = "../../petrol-client" }
+tokio = { workspace = true }

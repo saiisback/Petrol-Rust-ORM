@@ -1,0 +1,12 @@
+[package]
+name = "petrol-parser"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+once_cell = { workspace = true }
+pest = { workspace = true }
+pest_derive = { workspace = true }
+petrol-core = { path = "../petrol-core" }
+thiserror = { workspace = true }

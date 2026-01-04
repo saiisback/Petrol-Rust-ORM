@@ -1,0 +1,14 @@
+[package]
+name = "petrol-core"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Petrol Contributors <opensource@petrol.dev>"]
+
+[dependencies]
+chrono = { workspace = true }
+rust_decimal = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+toml = { workspace = true }
+uuid = { workspace = true }

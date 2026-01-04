@@ -1,0 +1,13 @@
+[package]
+name = "petrol-codegen"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+inflector = { workspace = true }
+petrol-core = { path = "../petrol-core" }
+quote = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+proc-macro2 = { workspace = true }

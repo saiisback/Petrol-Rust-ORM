@@ -1,0 +1,30 @@
+WHITESPACE = _{ " " | "\t" | NEWLINE }
+COMMENT = _{ "//" ~ (!NEWLINE ~ ANY)* }
+
+ident = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
+string = @{ "\"" ~ ("\\\"" | (!"\"" ~ ANY))* ~ "\"" }
+number = @{ "-"? ~ ASCII_DIGIT+ ~ ("." ~ ASCII_DIGIT+)? }
+boolean = @{ "true" | "false" }
+
+schema = { SOI ~ block* ~ EOI }
+block = _{ datasource | generator | model }
+
+datasource = { "datasource" ~ ident ~ "{" ~ ds_entry* ~ "}" }
+ds_entry = { ident ~ "=" ~ value }
+
+generator = { "generator" ~ ident ~ "{" ~ ds_entry* ~ "}" }
+
+model = { "model" ~ ident ~ "{" ~ model_item* ~ "}" }
+model_item = _{ field | model_attribute }
+field = { ident ~ type_expr ~ attribute* }
+model_attribute = { "@@" ~ ident ~ attribute_args? }
+
+attribute = { "@" ~ ident ~ attribute_args? }
+attribute_args = { "(" ~ (!")" ~ ANY)* ~ ")" }
+
+type_expr = { ident ~ optional? ~ list? }
+optional = { "?" }
+list = { "[]" }
+
+value = _{ string | env_call | number | boolean }
+env_call = { "env" ~ "(" ~ string ~ ")" }

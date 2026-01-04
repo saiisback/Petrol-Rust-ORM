@@ -1,0 +1,20 @@
+[package]
+name = "petrol-cli"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true }
+color-eyre = { workspace = true }
+inflector = { workspace = true }
+petrol-client = { path = "../petrol-client" }
+petrol-codegen = { path = "../petrol-codegen" }
+petrol-core = { path = "../petrol-core" }
+petrol-parser = { path = "../petrol-parser" }
+sqlx = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }

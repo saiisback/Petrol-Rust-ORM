@@ -1,0 +1,28 @@
+# Compiled artifacts
+/target/
+**/target/
+**/*.rs.bk
+
+# Dependency/lock files generated locally
+/Cargo.lock
+
+# Environment & credentials
+.env
+.env.*
+*.pem
+
+# Editor / tooling noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.cursor/
+.idea/
+.vscode/
+
+# Logs & temp files
+*.log
+*.tmp
+*.bak
+
+
